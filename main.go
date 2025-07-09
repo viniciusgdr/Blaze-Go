@@ -1,15 +1,15 @@
-package blaze
+package blazego
 
 import (
 	"context"
 	"encoding/json"
 	"fmt"
 	"maps"
-	"viniciusgdr/blaze/src/data/interfaces"
-	"viniciusgdr/blaze/src/data/usecases"
-	domainUsecases "viniciusgdr/blaze/src/domain/usecases"
-	"viniciusgdr/blaze/src/infra/app"
-	"viniciusgdr/blaze/src/infra/blaze"
+	"viniciusgdr/blazego/src/data/interfaces"
+	"viniciusgdr/blazego/src/data/usecases"
+	domainUsecases "viniciusgdr/blazego/src/domain/usecases"
+	"viniciusgdr/blazego/src/infra/app"
+	"viniciusgdr/blazego/src/infra/blaze"
 )
 
 type ConnectionBlaze struct {

@@ -1,4 +1,4 @@
-module viniciusgdr/blaze
+module viniciusgdr/blazego
 
 go 1.24.4
 
