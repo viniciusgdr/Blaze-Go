@@ -1,16 +1,15 @@
-package main
+package blaze
 
 import (
-	"maps"
 	"context"
 	"encoding/json"
 	"fmt"
-
-	"github.com/viniciusgdr/Blaze-Go/src/data/interfaces"
-	"github.com/viniciusgdr/Blaze-Go/src/data/usecases"
-	domainUsecases "github.com/viniciusgdr/Blaze-Go/src/domain/usecases"
-	"github.com/viniciusgdr/Blaze-Go/src/infra/app"
-	"github.com/viniciusgdr/Blaze-Go/src/infra/blaze"
+	"maps"
+	"viniciusgdr/blaze/src/data/interfaces"
+	"viniciusgdr/blaze/src/data/usecases"
+	domainUsecases "viniciusgdr/blaze/src/domain/usecases"
+	"viniciusgdr/blaze/src/infra/app"
+	"viniciusgdr/blaze/src/infra/blaze"
 )
 
 type ConnectionBlaze struct {
@@ -232,7 +231,6 @@ func GetNextGameEventTickWithContext(ctx context.Context, gameType string) (<-ch
 				}()
 			}
 		})
-
 
 		conn.On("double.tick", func(data interface{}) {
 			dataBytes, err := json.Marshal(data)

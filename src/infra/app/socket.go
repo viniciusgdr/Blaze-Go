@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/url"
 
-	domainUsecases "github.com/viniciusgdr/Blaze-Go/src/domain/usecases"
+	domainUsecases "viniciusgdr/blaze/src/domain/usecases"
 
 	"github.com/gorilla/websocket"
 )
