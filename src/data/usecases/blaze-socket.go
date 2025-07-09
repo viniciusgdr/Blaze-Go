@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"time"
 
-	"blaze/src/data/interfaces"
-	domainUsecases "blaze/src/domain/usecases"
+	"github.com/viniciusgdr/Blaze-Go/src/data/interfaces"
+	domainUsecases "github.com/viniciusgdr/Blaze-Go/src/domain/usecases"
 )
 
 type BlazeSocket struct {

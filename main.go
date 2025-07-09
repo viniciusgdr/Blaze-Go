@@ -6,11 +6,11 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"blaze/src/data/interfaces"
-	"blaze/src/data/usecases"
-	domainUsecases "blaze/src/domain/usecases"
-	"blaze/src/infra/app"
-	"blaze/src/infra/blaze"
+	"github.com/viniciusgdr/Blaze-Go/src/data/interfaces"
+	"github.com/viniciusgdr/Blaze-Go/src/data/usecases"
+	domainUsecases "github.com/viniciusgdr/Blaze-Go/src/domain/usecases"
+	"github.com/viniciusgdr/Blaze-Go/src/infra/app"
+	"github.com/viniciusgdr/Blaze-Go/src/infra/blaze"
 )
 
 type ConnectionBlaze struct {
