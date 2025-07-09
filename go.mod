@@ -1,4 +1,4 @@
-module viniciusgdr/blazego
+module github.com/viniciusgdr/blazego
 
 go 1.24.4
 

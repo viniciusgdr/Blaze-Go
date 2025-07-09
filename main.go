@@ -5,11 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"maps"
-	"viniciusgdr/blazego/src/data/interfaces"
-	"viniciusgdr/blazego/src/data/usecases"
-	domainUsecases "viniciusgdr/blazego/src/domain/usecases"
-	"viniciusgdr/blazego/src/infra/app"
-	"viniciusgdr/blazego/src/infra/blaze"
+	"github.com/viniciusgdr/blazego/src/data/interfaces"
+	"github.com/viniciusgdr/blazego/src/data/usecases"
+	domainUsecases "github.com/viniciusgdr/blazego/src/domain/usecases"
+	"github.com/viniciusgdr/blazego/src/infra/app"
+	"github.com/viniciusgdr/blazego/src/infra/blaze"
 )
 
 type ConnectionBlaze struct {

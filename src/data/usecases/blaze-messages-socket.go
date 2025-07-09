@@ -5,9 +5,9 @@ import (
 	"regexp"
 	"time"
 
-	domainUsecases "viniciusgdr/blazego/src/domain/usecases"
+	domainUsecases "github.com/viniciusgdr/blazego/src/domain/usecases"
 
-	"viniciusgdr/blazego/src/data/interfaces"
+	"github.com/viniciusgdr/blazego/src/data/interfaces"
 )
 
 type BlazeMessageSocket struct {
