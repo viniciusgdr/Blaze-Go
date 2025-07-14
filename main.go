@@ -5,11 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"maps"
-	"github.com/viniciusgdr/blazego/src/data/interfaces"
-	"github.com/viniciusgdr/blazego/src/data/usecases"
-	domainUsecases "github.com/viniciusgdr/blazego/src/domain/usecases"
-	"github.com/viniciusgdr/blazego/src/infra/app"
-	"github.com/viniciusgdr/blazego/src/infra/blaze"
 )
 
 type ConnectionBlaze struct {
@@ -35,7 +30,7 @@ type ConnectionOptions struct {
 }
 
 type ConnectionSocketResponses interface {
-	Connect(options domainUsecases.SocketOptions) error
+	Connect(options SocketOptions) error
 	On(event string, callback func(data interface{}))
 	Emit(event string, data interface{})
 	Send(data interface{}) error
@@ -49,7 +44,7 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 		if conn.URL != nil {
 			url = *conn.URL
 		} else {
-			url = blaze.GetBlazeURL("games")
+			url = GetBlazeURL("games")
 		}
 
 		headers := map[string]string{
@@ -79,11 +74,11 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 			}
 		}
 
-		socketOptions := domainUsecases.SocketOptions{
+		socketOptions := SocketOptions{
 			URL:   &url,
 			Type:  &conn.GameType,
 			Token: conn.Token,
-			Options: &domainUsecases.ConnectionSocketOpts{
+			Options: &ConnectionSocketOpts{
 				Host:    &host,
 				Origin:  &origin,
 				Headers: headers,
@@ -91,14 +86,14 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 			TimeoutPing: conn.TimeoutPing,
 		}
 
-		socket := app.NewNodeConnectionSocket()
+		socket := NewNodeConnectionSocket()
 
 		cacheIgnoreRepeatedEvents := true
 		if conn.CacheIgnoreRepeatedEvents != nil {
 			cacheIgnoreRepeatedEvents = *conn.CacheIgnoreRepeatedEvents
 		}
 
-		blazeSocket := usecases.NewBlazeSocket(socket, cacheIgnoreRepeatedEvents)
+		blazeSocket := NewBlazeSocket(socket, cacheIgnoreRepeatedEvents)
 		err := blazeSocket.Connect(socketOptions)
 		if err != nil {
 			return nil, err
@@ -111,7 +106,7 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 		if conn.URL != nil {
 			url = *conn.URL
 		} else {
-			url = blaze.GetBlazeURL("general")
+			url = GetBlazeURL("general")
 		}
 
 		headers := map[string]string{
@@ -139,11 +134,11 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 			}
 		}
 
-		socketOptions := domainUsecases.SocketOptions{
+		socketOptions := SocketOptions{
 			URL:   &url,
 			Type:  &conn.GameType,
 			Token: conn.Token,
-			Options: &domainUsecases.ConnectionSocketOpts{
+			Options: &ConnectionSocketOpts{
 				Host:    &host,
 				Origin:  &origin,
 				Headers: headers,
@@ -151,8 +146,8 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 			TimeoutPing: conn.TimeoutPing,
 		}
 
-		socketForMessages := app.NewNodeConnectionSocket()
-		blazeSocketForMessages := usecases.NewBlazeMessageSocket(socketForMessages)
+		socketForMessages := NewNodeConnectionSocket()
+		blazeSocketForMessages := NewBlazeMessageSocket(socketForMessages)
 		err := blazeSocketForMessages.Connect(socketOptions)
 		if err != nil {
 			return nil, err
@@ -166,8 +161,8 @@ func MakeConnection(conn Connection) (ConnectionSocketResponses, error) {
 }
 
 type GameEventResult struct {
-	Events []interfaces.CrashTickEvent `json:"events"`
-	Error  error                       `json:"error,omitempty"`
+	Events []CrashTickEvent `json:"events"`
+	Error  error            `json:"error,omitempty"`
 }
 
 // GetNextGameEventTick aguarda o próximo jogo completo e retorna todos os eventos
@@ -209,7 +204,7 @@ func GetNextGameEventTickWithContext(ctx context.Context, gameType string) (<-ch
 				return
 			}
 
-			var tickEvent interfaces.CrashTickEvent
+			var tickEvent CrashTickEvent
 			if err := json.Unmarshal(dataBytes, &tickEvent); err != nil {
 				errorChan <- err
 				return
@@ -239,7 +234,7 @@ func GetNextGameEventTickWithContext(ctx context.Context, gameType string) (<-ch
 				return
 			}
 
-			var tickEvent interfaces.DoubleTickEvent
+			var tickEvent DoubleTickEvent
 			if err := json.Unmarshal(dataBytes, &tickEvent); err != nil {
 				errorChan <- err
 				return

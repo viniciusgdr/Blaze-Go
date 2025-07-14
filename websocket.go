@@ -1,11 +1,9 @@
-package app
+package blazego
 
 import (
 	"errors"
 	"net/http"
 	"net/url"
-
-	domainUsecases "github.com/viniciusgdr/blazego/src/domain/usecases"
 
 	"github.com/gorilla/websocket"
 )
@@ -21,7 +19,7 @@ func NewNodeConnectionSocket() *NodeConnectionSocket {
 	}
 }
 
-func (n *NodeConnectionSocket) Connect(options domainUsecases.ConnectionSocketOptions) error {
+func (n *NodeConnectionSocket) Connect(options ConnectionSocketOptions) error {
 	if options.URL == nil {
 		return errors.New("missing url")
 	}

@@ -1,30 +1,26 @@
-package usecases
+package blazego
 
 import (
 	"encoding/json"
 	"regexp"
 	"time"
-
-	domainUsecases "github.com/viniciusgdr/blazego/src/domain/usecases"
-
-	"github.com/viniciusgdr/blazego/src/data/interfaces"
 )
 
 type BlazeMessageSocket struct {
-	socket    domainUsecases.ConnectionSocket
+	socket    ConnectionSocket
 	callbacks map[string][]func(interface{})
 	interval  *time.Ticker
 }
 
-func NewBlazeMessageSocket(socket domainUsecases.ConnectionSocket) *BlazeMessageSocket {
+func NewBlazeMessageSocket(socket ConnectionSocket) *BlazeMessageSocket {
 	return &BlazeMessageSocket{
 		socket:    socket,
 		callbacks: make(map[string][]func(interface{})),
 	}
 }
 
-func (b *BlazeMessageSocket) Connect(options domainUsecases.SocketOptions) error {
-	connectionOptions := domainUsecases.ConnectionSocketOptions{
+func (b *BlazeMessageSocket) Connect(options SocketOptions) error {
+	connectionOptions := ConnectionSocketOptions{
 		URL:     options.URL,
 		Options: options.Options,
 	}
@@ -94,7 +90,7 @@ func (b *BlazeMessageSocket) onMessage() {
 	})
 }
 
-func (b *BlazeMessageSocket) initClose(options domainUsecases.SocketOptions) {
+func (b *BlazeMessageSocket) initClose(options SocketOptions) {
 	b.socket.On("close", func(data interface{}) {
 		if b.interval != nil {
 			b.interval.Stop()
@@ -119,7 +115,7 @@ func (b *BlazeMessageSocket) initClose(options domainUsecases.SocketOptions) {
 			}()
 		}
 
-		closeEvent := interfaces.CloseEvent{
+		closeEvent := CloseEvent{
 			Code:      code,
 			Reconnect: reconnect,
 		}

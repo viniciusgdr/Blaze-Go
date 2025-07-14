@@ -1,4 +1,4 @@
-package interfaces
+package blazego
 
 import (
 	"encoding/json"
@@ -18,11 +18,11 @@ type BlazeEventMap struct {
 
 // CrashTickEvent representa um evento de tick do crash
 type CrashTickEvent struct {
-	ID           string   `json:"id"`
-	UpdatedAt    string   `json:"updated_at"`
-	Status       string   `json:"status"`
+	ID           string         `json:"id"`
+	UpdatedAt    string         `json:"updated_at"`
+	Status       string         `json:"status"`
 	CrashPoint   *Float64String `json:"crash_point"`
-	IsBonusRound bool     `json:"is_bonus_round"`
+	IsBonusRound bool           `json:"is_bonus_round"`
 }
 
 // CrashTickBetsEvent representa as apostas do crash (apenas crash_2)
@@ -37,19 +37,19 @@ type CrashTickBetsEvent struct {
 
 // DoubleTickEvent representa um evento de tick do double
 type DoubleTickEvent struct {
-	ID                   string  `json:"id"`
+	ID                   string          `json:"id"`
 	Color                *StringOrNumber `json:"color"`
 	Roll                 *StringOrNumber `json:"roll"`
-	CreatedAt            string  `json:"created_at"`
-	UpdatedAt            string  `json:"updated_at"`
-	Status               string  `json:"status"` // "rolling", "waiting", "complete"
-	TotalRedEurBet       float64 `json:"total_red_eur_bet"`
-	TotalRedBetsPlaced   int     `json:"total_red_bets_placed"`
-	TotalWhiteEurBet     float64 `json:"total_white_eur_bet"`
-	TotalWhiteBetsPlaced int     `json:"total_white_bets_placed"`
-	TotalBlackEurBet     float64 `json:"total_black_eur_bet"`
-	TotalBlackBetsPlaced int     `json:"total_black_bets_placed"`
-	Bets                 []Bet   `json:"bets"`
+	CreatedAt            string          `json:"created_at"`
+	UpdatedAt            string          `json:"updated_at"`
+	Status               string          `json:"status"` // "rolling", "waiting", "complete"
+	TotalRedEurBet       float64         `json:"total_red_eur_bet"`
+	TotalRedBetsPlaced   int             `json:"total_red_bets_placed"`
+	TotalWhiteEurBet     float64         `json:"total_white_eur_bet"`
+	TotalWhiteBetsPlaced int             `json:"total_white_bets_placed"`
+	TotalBlackEurBet     float64         `json:"total_black_eur_bet"`
+	TotalBlackBetsPlaced int             `json:"total_black_bets_placed"`
+	Bets                 []Bet           `json:"bets"`
 }
 
 // ChatMessageEvent representa uma mensagem do chat
